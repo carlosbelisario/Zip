@@ -409,7 +409,7 @@ class Extract extends Zip
                         ) || (
                             $tmpInfo->isDir() === true
                             && file_exists($destination) === true
-                            $this->overwrite === true
+                            && $this->overwrite === true
                         )
                     ){
                         $filesMoved[] = realpath($destination);

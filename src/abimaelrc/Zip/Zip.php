@@ -27,7 +27,7 @@ class Zip
     /**
      * @var string
      */
-    protected $mode = '0666';
+    protected $mode = 0755;
 
     /**
      * @var array
@@ -237,11 +237,8 @@ class Zip
         if (empty($path) === true) {
             return false;
         }
-        chmod($path, $this->getMode());
-
 
         foreach (array_reverse($this->iterateDir($path, true)) as $k => $v) {
-            chmod($v, $this->getMode());
             $info = new SplFileInfo($v);
             if ($info->isDir() === true) {
                 rmdir($v);
@@ -260,6 +257,7 @@ class Zip
     {
         if (method_exists($this->zip, $method) === true) {
             call_user_func_array(array($this->zip, $method), $arguments);
+
             return $this;
         }
 
